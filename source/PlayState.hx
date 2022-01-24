@@ -975,7 +975,6 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camHUD];
 
 		#if mobileC
-			mcontrols = new Mobilecontrols();
 	                var curcontrol:HitboxType = DEFAULT;
 			switch (mania){
 			case 0:
@@ -1007,11 +1006,11 @@ class PlayState extends MusicBeatState
 			var camcontrol = new FlxCamera();
 			FlxG.cameras.add(camcontrol);
 			camcontrol.bgColor.alpha = 0;
-			mcontrols.cameras = [camcontrol];
+			_hitbox.cameras = [camcontrol];
 
-			mcontrols.visible = false;
+			_hitbox.visible = false;
 
-			add(mcontrols);
+			add(_hitbox);
 		#end		
 
 		// if (SONG.song == 'South')
