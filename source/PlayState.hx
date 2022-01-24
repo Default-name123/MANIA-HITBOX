@@ -63,6 +63,7 @@ import sys.io.File;
 
 #if mobileC
 import ui.Mobilecontrols;
+import ui.Hitbox;
 #end
 
 using StringTools;
@@ -182,6 +183,8 @@ class PlayState extends MusicBeatState
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
 	public var combo:Int = 0;
+	
+	var _hitbox:Hitbox;
 
 	private var healthBarBG:AttachedSprite;
 	public var healthBar:FlxBar;
@@ -973,13 +976,32 @@ class PlayState extends MusicBeatState
 
 		#if mobileC
 			mcontrols = new Mobilecontrols();
-			switch (mcontrols.mode)
-			{
-				case HITBOX:
-					controls.setHitBoxNOTES(mcontrols._hitbox);
-				default:
-			}
-			trackedinputsNOTES = controls.trackedinputsNOTES;
+	                var curcontrol:HitboxType = DEFAULT;
+			switch (mania){
+			case 0:
+				curcontrol = DEFAULT;
+			case 1:
+				curcontrol = SIX;
+			case 2:
+				curcontrol = NINE;					
+			case 3:
+				curcontrol = FIVE;	
+			case 4:
+				curcontrol = SEVEN;
+			case 5:
+				curcontrol = EIGHT;
+			case 6:
+				curcontrol = ONE;
+			case 7:
+				curcontrol = TWO;
+			case 8:
+				curcontrol = THREE;									
+			default:
+				curcontrol = DEFAULT;
+		}
+			_hitbox = new Hitbox(curcontrol);
+		        controls.setHitBoxNOTES(_hitbox, curcontrol);
+	                trackedinputsNOTES = controls.trackedinputsNOTES;
 			controls.trackedinputsNOTES = [];
 
 			var camcontrol = new FlxCamera();
